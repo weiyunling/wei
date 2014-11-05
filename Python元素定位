@@ -1,0 +1,31 @@
+#Python + selenium
+#元素定位
+#coding=utf-8
+
+#Python+Selenium 元素定位练习
+
+from selenium import webdriver
+dr = webdriver.Chrome()
+dr.get("http://www.baidu.com")
+
+# id定位输入框
+dr.find_element_by_id("kw").send_keys("id")
+# id定位“百度一下”按钮
+dr.find_element_by_id("su").click()
+
+# name定位页面元素
+dr.find_element_by_name("wd").send_keys("name")
+
+# link_Text定位页面元素
+# dr.find_element_by_link_text("关于百度")
+
+# patial link text部分元素定位页面
+# dr.find_element_by_partial_link_text("把百度")
+
+# xpath定位元素
+#绝对路径定位元素
+#chrome 不能用绝对定位到元素
+dr.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[1]/div/form/span[1]/input").send_keys("xpth绝对路径")
+
+# 关闭页面，浏览器及相关驱动
+dr.quit()
