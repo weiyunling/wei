@@ -1,31 +1,50 @@
-#Python + selenium
-#元素定位
 #coding=utf-8
 
 #Python+Selenium 元素定位练习
-
 from selenium import webdriver
 dr = webdriver.Chrome()
 dr.get("http://www.baidu.com")
-
-# id定位输入框
+# # id定位输入框
 dr.find_element_by_id("kw").send_keys("id")
-# id定位“百度一下”按钮
+# # id定位“百度一下”按钮
 dr.find_element_by_id("su").click()
 
 # name定位页面元素
 dr.find_element_by_name("wd").send_keys("name")
 
 # link_Text定位页面元素
-# dr.find_element_by_link_text("关于百度")
+dr.find_element_by_link_text("关于百度")
 
 # patial link text部分元素定位页面
-# dr.find_element_by_partial_link_text("把百度")
+dr.find_element_by_partial_link_text("把百度")
 
 # xpath定位元素
 #绝对路径定位元素
-#chrome 不能用绝对定位到元素
-dr.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[1]/div/form/span[1]/input").send_keys("xpth绝对路径")
+dr.find_element_by_xpath("/html/body/div/div/div/div/div/div/div/form/span/input").send_keys("xpth绝对路径")
+dr.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[1]/div/form/span[1]/input").send_keys(u"xpth绝对路径")
+# 相对路径定位元素
+dr.find_element_by_xpath("//input[@id='kw']").send_keys(u"相对路径定位id")
+dr.find_element_by_xpath("//*[@id='kw']").send_keys(u"不用tag标签的相对定位元素")
+dr.find_element_by_xpath("//*[@name='wd']").send_keys(u"相对路径name定位")
+dr.find_element_by_xpath("//*[@maxlength='100']").send_keys(u"相对路径用其他方式来定位元素")
+
+# 找上级定位,如果元素定位的标签值有空格，可能会导致页面定位不到元素
+dr.find_element_by_xpath("//form[@id='form']/span/input").send_keys(u"xpath找上级定位")
+
+# 通过and ,or 定位元素,但是or的用处不大，一个元素的值不太可能同时存在两个值
+dr.find_element_by_xpath("//input[@id='kw'and @name='wd']").send_keys(u"通过and定位元素")
+
+# css定位元素
+# class,"."
+dr.find_element_by_css_selector(".s_ipt").send_keys(u".表示class")
+# id，“#”
+dr.find_element_by_css_selector("#kw").send_keys(u"#表示id")
+# name
+dr.find_element_by_css_selector("input[name='wd']").send_keys(u"用css中的name定位不需要输入//,标签前也不需要用@")
+# 层级定位
+dr.find_element_by_css_selector("form[id='form']>span>input").send_keys(u">表示父子关系")
+
 
 # 关闭页面，浏览器及相关驱动
 dr.quit()
+
