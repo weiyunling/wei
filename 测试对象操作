@@ -1,0 +1,51 @@
+# coding=utf-8
+
+# 操作测试对象
+#163邮箱登录实例
+
+from selenium import webdriver
+# 错误：UnicodeEncodeError: 'ascii' codec can't encode character u'\xa9' in position 0: ordinal not in range(128)
+# 错误：Unicode编码与ASCII编码的不兼容
+# 解决方法
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+dr = webdriver.Chrome()
+# dr = webdriver.Firefox()
+dr.get("http://email.163.com/#from=163nav_icon")
+
+# 清楚已输入账号
+dr.find_element_by_id("userNameIpt").clear()
+# 输入账号
+dr.find_element_by_id("userNameIpt").send_keys("*******")
+# 清楚已输入密码
+dr.find_element_by_id("pwdInput").clear()
+# 输入密码
+dr.find_element_by_id("pwdInput").send_keys("*******")
+# 点击登录按钮
+dr.find_element_by_id("btnSubmit").click()
+# 通过submit()来提交表单
+dr.find_element_by_id("btnSubmit").submit()
+
+dr.get("http://www.baidu.com")
+# 返回百度输入框的宽高
+size = dr.find_element_by_id("kw").size
+print size
+# 返回百度底部信息
+text = dr.find_element_by_id("cp").text
+print text
+
+# attribute 获得属性值
+attribute = dr.find_element_by_id("kw").get_attribute("type")
+print attribute
+
+# is_displayed(),s设置该元素是否可见
+result = dr.find_element_by_id("kw").is_displayed()
+print result
+
+
+# 关闭浏览器
+dr.quit()
+
+
