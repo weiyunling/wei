@@ -1,0 +1,42 @@
+# coding=utf-8
+
+# 键盘事件
+from selenium import webdriver
+# 引入Keys类包
+from selenium.webdriver.common.keys import Keys
+import time
+
+dr = webdriver.Chrome()
+dr.get("http://www.baidu.com")
+
+# 输入框中输入内容
+dr.find_element_by_id("kw").send_keys(u"键盘事件m")
+time.sleep(3)
+
+# 删除多输入的一个m
+dr.find_element_by_id("kw").send_keys(Keys.BACK_SPACE)
+time.sleep(3)
+
+# 输入“空格键” + “教程”
+dr.find_element_by_id("kw").send_keys(Keys.SPACE)
+dr.find_element_by_id("kw").send_keys(u"教程")
+time.sleep(3)
+
+# ctrl + a全选输入框内容
+dr.find_element_by_id("kw").send_keys(Keys.CONTROL,'a')
+time.sleep(3)
+
+# ctrl + x 剪切输入框内容
+dr.find_element_by_id("kw").send_keys(Keys.CONTROL,'x')
+time.sleep(3)
+
+# 输入框中粘贴复制内容，搜索
+dr.find_element_by_id("kw").send_keys(Keys.CONTROL,'v')
+time.sleep(3)
+
+# 通过ENTER键代替点击操作
+dr.find_element_by_id("su").send_keys(Keys.ENTER)
+time.sleep(3)
+
+# 关闭浏览器
+dr.quit()
