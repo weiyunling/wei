@@ -1,0 +1,21 @@
+#coding=utf-8
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+
+
+dr = webdriver.Friefox()
+dr.get("http://www.baidu.com")
+# 定位“登录”按钮
+dr.find_element_by_link_text("登录").click()
+# 输入用户名，密码，登录
+dr.find_element_by_id("TANGRAM__PSP_8__userName").send_keys("user")
+dr.find_element_by_id("TANGRAM__PSP_8__password").send_keys("pwd")
+dr.find_element_by_id("TANGRAM__PSP_8__submit").click()
+
+time.sleep(3)
+
+# 关闭浏览器
+dr.quit()
+
+
