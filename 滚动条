@@ -1,0 +1,26 @@
+# coding=utf-8
+
+from selenium import webdriver
+import time
+
+# 访问百度
+dr = webdriver.Firefox()
+dr.get("http://www.baidu.com")
+
+# 搜索
+dr.find_element_by_id("kw").send_keys("selenium")
+dr.find_element_by_id("su").click()
+# 窗口最大化
+dr.maximize_window()
+
+# 将页面滚动条拖到底部
+js = "var q=document.documentElement.scrollTop=20000"
+dr.execute_script(js)
+time.sleep(3)
+
+# 将滚动条移动到页面中部
+js = "var q=document.documentElement.scrollTop=0"
+dr.execute_script(js)
+time.sleep(3)
+
+dr.quit()
