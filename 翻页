@@ -1,0 +1,31 @@
+#-*-coding:utf-8-*-
+
+from selenium import webdriver
+from time import sleep
+
+dr = webdriver.Chrome()
+dr.get("http://www.yixieshi.com/")
+
+# 浏览器最大化
+dr.maximize_window()
+# 统计总页数
+total_pages = len(dr.find_element_by_class_name("pages").find_elements_by_tag_name("li"))
+print "total pages is %d" %(total_pages)
+sleep(3)
+
+# 先点击固定页数的标签
+dr.find_element_by_class_name("pages").find_element_by_xpath("//*[@id='contrainer']/div[3]/ul/li[2]/a").click()
+
+# 获得当前窗口
+nowhandle = dr.current_window_handle
+dr.switch_to_window(nowhandle)
+print nowhandle
+
+# 定位新的翻页元素
+newpages = dr.find_element_by_class_name("newpage").find_elements_by_xpath("//*[@id='contrainer']/div[3]/a")
+dr.find_element_by_class_name("newpage").find_element_by_xpath("//*[@id='contrainer']/div[3]/a[6]").click()
+
+
+sleep(2)
+# 关闭浏览器
+# dr.close()
