@@ -1,0 +1,21 @@
+# coding=utf-8
+
+from selenium import webdriver
+import os,time
+
+dr = webdriver.Chrome()
+
+# 打开上传文件页面
+'''
+os.path.abspath(path)
+返回path规范化的绝对路径
+'''
+file_path = 'file:///' + os.path.abspath('1.html')
+dr.get(file_path)
+
+# 定位上传按钮，添加本地文件
+dr.find_element_by_name("file").send_keys("E:\selenium\ex\ex1.py")
+
+time.sleep(2)
+
+dr.quit()
