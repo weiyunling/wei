@@ -1,0 +1,18 @@
+# -*-coding:utf-8-*-
+
+from selenium import webdriver
+import time
+
+dr = webdriver.Chrome()
+dr.get("http://news.ifeng.com/history/")
+time.sleep(3)
+
+# 定位下拉框
+xlk = dr.find_element_by_id("h_searchFormOption")
+
+# 再点击下拉框的下拉选项
+xlk.find_element_by_xpath("//li[@id='h_ra2']/a").click()
+time.sleep(3)
+
+# 关闭浏览器
+dr.quit()
