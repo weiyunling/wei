@@ -1,0 +1,56 @@
+#search
+
+#coding=utf-8
+
+from time import sleep
+from selenium import webdriver
+from exceptions import AssertionError
+# import unittest
+import os
+
+# 资讯搜索
+def newssearch(search):
+    dr = webdriver.Chrome()
+    dr.get("http://search.ifeng.com")
+    # 窗口最大化
+    dr.maximize_window()
+  	# 定位凤凰网logo并验证点击logo后是否跳转到凤首页面
+    dr.find_element_by_xpath("/html/body/div[2]/center/div/a/img").click()
+    # 获得当前窗口句柄
+    nowhandle = dr.current_window_handle
+    # 获得所有窗口句柄
+    allhandles = dr.window_handles
+    # 判断窗口是否为当前窗口，如果不是，关闭此窗口
+    for handle in allhandles:
+	    if handle != nowhandle:
+	        dr.switch_to_window(handle)
+	    	dr.close()
+	    	# 返回当前窗口
+	    	dr.switch_to_window(nowhandle)
+            sleep(2)
+    # 捕获输入框异常
+    try:
+
+	    # 定位输入框
+        dr.find_element_by_css_selector("body > div.main > div > div.serch_box > form > input.ifengSS").send_keys(search)
+        # 点击“搜索”按钮
+        dr.find_element_by_xpath("/html/body/div[2]/div/div[1]/form/span[1]/input").click()
+    except:
+        br.get_screenshot_as_file("E:\\selenium\\ex\\searchifeng\\%s.png" %datetime.now().strftime("%y%m%d.%h%m%s.%f"))
+    finally:
+        # 关闭浏览器
+        dr.quit()
+
+    # 次搜索页面多次循环
+    # 读取txt文件中的查询数据
+    # source = open("E:\\selenium\\ex\\searchifeng\\public\\searchdata.txt","r")
+    # values = source.readlines()
+    # source.close()
+    # for value in values:
+    #         # 定位新的页面元素
+    #     dr.find_element_by_class_name("tex").clear()
+    #     dr.find_element_by_class_name("tex").send_keys(value)
+    #     dr.find_element_by_class_name("bt").click()
+    #     sleep(3)
+    
+
