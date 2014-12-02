@@ -1,0 +1,21 @@
+#coding=utf-8
+
+from selenium import webdriver
+from time import sleep
+# 导入csv包
+import csv
+import sys
+sys.path.append("\\public")
+from public import ser
+
+# 读取本地csv文件
+my_file ="E:\\selenium\\ex\\searchifeng\\public\\data.csv"
+data = csv.reader(file(my_file,'rb'))
+
+# 主搜索页面多次循环
+# 循环输出每一行信息
+for line in data:
+	ser.newssearch(line)
+
+# #主搜索页面一次循环
+# ser.newssearch("selenium") 
