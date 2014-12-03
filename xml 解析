@@ -1,0 +1,117 @@
+  <?xml version="1.0" encoding="UTF-8" standalone="yes" ?> 
+- <persons>
+- <person id="0">
+  <name>zhang_0</name> 
+  <age>18</age> 
+  </person>
+- <person id="1">
+  <name>zhang_1</name> 
+  <age>19</age> 
+  </person>
+- <person id="2">
+  <name>zhang_2</name> 
+  <age>20</age> 
+  </person>
+- <person id="3">
+  <name>zhang_3</name> 
+  <age>21</age> 
+  </person>
+- <person id="4">
+  <name>zhang_4</name> 
+  <age>22</age> 
+  </person>
+- <person id="5">
+  <name>zhang_5</name> 
+  <age>23</age> 
+  </person>
+- <person id="6">
+  <name>zhang_6</name> 
+  <age>24</age> 
+  </person>
+- <person id="7">
+  <name>zhang_7</name> 
+  <age>25</age> 
+  </person>
+- <person id="8">
+  <name>zhang_8</name> 
+  <age>26</age> 
+  </person>
+- <person id="9">
+  <name>zhang_9</name> 
+  <age>27</age> 
+  </person>
+  </persons>
+  
+  
+  
+  
+# coding=utf-8
+
+from  xml.dom import  minidom
+
+# 获取XML节点属性值
+def get_attrvalue(node,attrname):
+	return node.getAttribute(attrname) if node else ""
+
+#返回子节点列表的节点值
+def get_nodevalue(node,index = 0):
+	return node.childNodes[index].nodeValue if node else ""
+
+# 获取XML节点对象集合
+def get_xmlnode(node,name):
+	return node.getElementsByTagName(name) if node else ""
+
+# def xml_to_string(filename = "Person.xml"):
+# 	# 加载读取XML文件
+# 	doc = minidom.parse(filename)
+# 	return doc.toxml("utf-8")
+
+def get_xml_data(filename="Person.xml"):
+	# 加载读取XML文件
+	doc = minidom.parse(filename)
+	# 获取XML文档对象
+	root = doc.documentElement
+    
+    # 获取person节点对象集合
+	user_nodes = get_xmlnode(root,'person')
+	user_list=[]
+	for node in user_nodes:
+		# 获取id的属性值
+		user_id = get_attrvalue(node,'id')
+		# 获取name节点的集合
+		node_name = get_xmlnode(node,'name')
+		# 获取age节点集合
+		node_age = get_xmlnode(node,'age')
+
+        # 获取name节点内容
+		user_name = get_nodevalue(node_name[0])
+		# 获取age节点内容
+		user_age = int(get_nodevalue(node_age[0]))
+
+		user = {}
+		user['id'],user['name'],user['age'] = (int(user_id),user_name,user_age)
+		user_list.append(user)
+	return user_list
+
+def test_xmltostring():
+	print xml_to_string()
+
+def test_load_xml():
+	user_list = get_xml_data()
+	for user in user_list:
+	    print '-----------------'
+	    if user:
+	        user_str = 'id:%d\n name:%s\n age:%s\n' % (int(user['id']),user['name'],user['age']) 
+	        print user_str
+	        print '========================' 
+
+if __name__=="__main__":
+    # test_xmltostring()
+    test_load_xml()
+
+  
+  
+  
+  
+  
+  
