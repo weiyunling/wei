@@ -10,5 +10,5 @@
 ![](https://github.com/weiyunling/pic/blob/master/2016-2-29/ssl-4.png)
 
 ##第四：keystore路径
-![](https://github.com/weiyunling/pic/blob/master/2016-2-29/keystore.png）
+![](https://github.com/weiyunling/pic/blob/master/2016-2-29/keystore.png)
 
